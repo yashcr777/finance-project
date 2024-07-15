@@ -3,10 +3,9 @@ import { insertAccountSchema } from "@/db/schema";
 import { Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle } from "@/components/ui/sheet";
 import { useOpenAccount } from "../hooks/use-open-account";
 import { AccountForm } from "./account-form";
-import { useCreateAccount } from "../api/use-create-account";
 import { useGetAccount } from "../api/use-get-account";
 import { Loader2 } from "lucide-react";
-
+import { useEditAccount } from "../api/use-edit-account";
 const formSchema=insertAccountSchema.pick({
     name:true,
 })
@@ -19,10 +18,13 @@ export const EditAccountSheet=()=>{
     const accountQuery=useGetAccount(id);
 
     const isLoading=accountQuery.isLoading;
-    const mutation=useCreateAccount();
+    const editMutation=useEditAccount(id);
+    
+
+    const isPending=editMutation.isPending
 
     const onSubmit =(values:FormValues)=>{
-        mutation.mutate(values,{
+        editMutation.mutate(values,{
             onSuccess:()=>{
                 onClose();
             },
@@ -48,7 +50,7 @@ export const EditAccountSheet=()=>{
                 {isLoading
                 ?(<div className="absolute inset-0 flex items-center justify-center">
                     <Loader2 className="size-4 text-muted-foreground animate-spin"/>
-                </div>):(<AccountForm id={id} onSubmit={onSubmit} disabled={mutation.isPending}
+                </div>):(<AccountForm id={id} onSubmit={onSubmit} disabled={isPending}
                 defaultValues={defaultValues}/>)}
             </SheetContent>
         </Sheet>
