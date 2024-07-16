@@ -22,6 +22,13 @@
       "when": 1721113967877,
       "tag": "0002_breezy_corsair",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1721127895250,
+      "tag": "0003_common_cassandra_nova",
+      "breakpoints": true
     }
   ]
 }
