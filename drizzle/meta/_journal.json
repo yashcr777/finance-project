@@ -15,6 +15,13 @@
       "when": 1720892656167,
       "tag": "0001_blue_impossible_man",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1721113967877,
+      "tag": "0002_breezy_corsair",
+      "breakpoints": true
     }
   ]
 }
