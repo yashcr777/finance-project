@@ -2,7 +2,7 @@ import { z } from "zod";
 import { insertAccountSchema } from "@/db/schema";
 import { Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle } from "@/components/ui/sheet";
 import { useOpenAccount } from "../hooks/use-open-account";
-import { AccountForm } from "./account-form";
+import { AccountForm } from "./transaction-form";
 import { useGetAccount } from "../api/use-get-transaction";
 import { Loader2 } from "lucide-react";
 import { useEditAccount } from "../api/use-edit-transaction";
