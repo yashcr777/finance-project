@@ -5,12 +5,13 @@ import {zodResolver} from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { insertAccountSchema, insertTransactionSchema } from "@/db/schema";
+import {  insertTransactionSchema } from "@/db/schema";
 import { Form,FormControl,FormField,FormItem,FormLabel,FormMessage } from "@/components/ui/form";
 import { Select } from "@/components/select";
 import { DatePicker } from "@/components/date-picker";
 import { Textarea } from "@/components/ui/textarea";
-
+import { AmountInput } from "@/components/amount-input";
+import { convertAmountToMiliunits } from "@/lib/utils";
 
 
 const formSchema=z.object({
@@ -54,9 +55,13 @@ export const TransactionForm=({
         defaultValues:defaultValues,
     });
     const handleSubmit=(values:FormValues)=>{
-        // onSubmit(values);
-        console.log({values});
-    }
+        const amount=parseFloat(values.amount);
+        const amountInMiliunits=convertAmountToMiliunits(amount);
+        onSubmit({
+            ...values,
+            amount:amountInMiliunits,
+        });
+    };
     const hanldeDelete=()=>{
         onDelete?.();
     };
@@ -140,6 +145,24 @@ export const TransactionForm=({
                 )}
                 />
                 <FormField
+                name="amount"
+                control={form.control}
+                render={({field})=>(
+                    <FormItem>
+                        <FormLabel>
+                            Amount
+                        </FormLabel>
+                        <FormControl>
+                            <AmountInput
+                            {...field}
+                            disabled={disabled}
+                            placeholder="0.00"
+                            />
+                        </FormControl>
+                    </FormItem>
+                )}
+                />
+                <FormField
                 name="notes"
                 control={form.control}
                 render={({field})=>(
@@ -159,12 +182,12 @@ export const TransactionForm=({
                 )}
                 />
                 <Button className="w-full" disabled={disabled}>
-                    {id? "Save Changes":"Create Account"}
+                    {id? "Save Changes":"Create Transaction"}
                 </Button>
                 {!!id && <Button type="button" disabled={disabled} onClick={hanldeDelete}
                 className="w-full" variant="outline">
                     <Trash className="size-4 mr-2"/>
-                    Delete Account
+                    Delete Transaction
                 </Button>}
             </form>
         </Form>
