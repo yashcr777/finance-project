@@ -40,6 +40,7 @@ const TransactionsPage=()=>{
     const [importResults, setImportResults]=useState(INTIAL_IMPORT_RESULTS);
 
     const onUpload=(results:typeof INTIAL_IMPORT_RESULTS)=>{
+        console.log(results);
         setImportResults(results);
         setVariant(VARIANTS.IMPORT);
     };
@@ -97,8 +98,8 @@ const TransactionsPage=()=>{
                     <CardTitle className="text-xl line-clamp-1">
                     transaction History
                     </CardTitle>
-                    <div className="flex items-center gap-x-2">
-                    <Button onClick={newTransaction.onOpen} size="sm">
+                    <div className="flex flex-col lg:flex-row gap-y-2 items-center gap-x-2">
+                    <Button onClick={newTransaction.onOpen} size="sm" className="w-full lg:w-auto">
                         <Plus className="size-4 mr-2"/>
                         Add New
                     </Button>
