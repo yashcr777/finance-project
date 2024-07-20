@@ -3,6 +3,7 @@ import { handle } from 'hono/vercel'
 import accounts from "./accounts";
 import  categories  from "./categories";
 import transactions from "./transactions"
+import summary from "./summary";
 import { HTTPException } from 'hono/http-exception';
 
 
@@ -10,6 +11,7 @@ export const runtime = 'edge'
 
 const app = new Hono().basePath('/api');
 const routes=app
+    .route("/summary",summary)
     .route("/accounts",accounts)
     .route("/categories",categories)
     .route("transactions",transactions)
