@@ -43,6 +43,8 @@ export const DatePicker=({
             onSelect={onChange}
             disabled={disabled}
             initialFocus
+            fromYear={1990}
+            toYear={new Date().getFullYear() + 10}
             />
         </PopoverContent>
     </Popover>
